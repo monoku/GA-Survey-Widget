@@ -1,0 +1,53 @@
+//Test SCSS for JS Widget
+//By @PixelHorror
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+
+#widget_container {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #c3c3c3;
+    @include border-radius(5px);
+    font-family: Verdana, Arial;
+    font-size: 12px;
+    color: #5e5e5e;
+    width: 250px;
+
+        #widget_question {
+            padding: 10px;    
+        }
+
+        #widget_answers {
+            padding: 10px;    
+            li {
+                @include border-radius(5px);
+                @include box-shadow(#c3c3c3 2px 2px 2px);
+                border: 1px solid #c3c3c3;
+                color: #009ada;
+                padding: 8px;
+                margin: 5px 0;
+
+                &:hover {
+                    color: white; 
+                    background: #009ada;
+                    border: 1px solid #3D7F7F;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        #widget_info {
+            background: #dddddd;
+
+        }
+
+        .hidden {
+            display: none;
+        }
+        .thanks {
+            padding: 10px;
+            color: #009ADA;
+            font-weight: bold;
+            font-size: 15px;
+        }
+}
