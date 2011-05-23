@@ -83,14 +83,15 @@ function Main(){
             parent_div.appendChild(info_div);
             info_div.appendChild(detail_div);
 
-            var body = document.getElementsByTagName("body")[0];
-
-            body.appendChild(parent_div);
+            var element = document.getElementById("body");
+            element.appendChild(parent_div);
         }
 
-        function thanks_message(){
+        function show_thanks_message(){
             var thanks_message = document.createElement("p");  
             thanks_message.id = "widget_thanks";
+            thanks_message.innerHTML = "Muchas Gracias Por tu Aporte :)";
+            document.getElementById("widget_container").appendChild(thanks_message);
         }
 
         //Injects the style
@@ -124,6 +125,8 @@ function Main(){
             var second_container = document.getElementById("widget_answers");
 
             var info = document.getElementById("widget_thanks");
+
+            show_thanks_message();
 
             container.style.display = "none";
             second_container.style.display = "none";
