@@ -81,8 +81,18 @@ function Main(){
             parent_div.appendChild(question_div);
             parent_div.appendChild(answers_ul);
             parent_div.appendChild(info_div);
+            info_div.appendChild(detail_div);
+
+            var body = document.getElementsByTagName("body")[0];
+
+            body.appendChild(parent_div);
         }
-        
+
+        function thanks_message(){
+            var thanks_message = document.createElement("p");  
+            thanks_message.id = "widget_thanks";
+        }
+
         //Injects the style
         function inject_style(){
             var head_element = document.getElementsByTagName("head")[0];
@@ -96,7 +106,7 @@ function Main(){
 
             var answer_list = document.getElementById("widget_answers");
 
-            for (var i=1;i <= answer_list.childElementCount; i++)
+            for (var i=0; i < answer_list.childElementCount; i++)
             {
                 answer_list.childNodes[i].addEventListener("click",push_to_analytics,false);
             } 
@@ -121,8 +131,8 @@ function Main(){
         }
 
         if(is_found) {
-            generate_html(selected_question);
             inject_markup();
+            generate_html(selected_question);
             inject_style();
             bind_events();
         }
