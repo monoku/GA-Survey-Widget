@@ -102,6 +102,7 @@ function Main(){
 
         for (var i=0;i < answer_list.children.length - 1 ; i++)
         {
+            console.log(i);
             //This line fucks shit up like no tomorrow, it doesn't let the code stop checking.
             //answer_list[i].addEventListener("click",push_to_analytics);
         } 
