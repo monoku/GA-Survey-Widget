@@ -23,7 +23,9 @@ function Main(){
         var questions = {
             q1: {question:"Cual es tu color favorito?",question_short:"Color",answers:["rojo","verde","azul"]},
             q2: {question:"Cual es Genero?",question_short:"genero",answers:["Masculino","Femenino"]},
-            q3: {question:"Cual sabor de helado favorito?",question_short:"sabores",answers:["Fresa","Vainilla","Mora","Atun"]}
+            q3: {question:"Cual sabor de helado favorito?",question_short:"sabores",answers:["Fresa","Vainilla","Mora","Atun"]},
+            q4: {question:"Cual es tu musica favorita?",question_short:"musica",answers:["Rock","Salsa","Electro","Atun"]},
+            q5: {question:"Cual es tu nacionalidad?",question_short:"nacionalidad",answers:["Colombiano","Europeo","Japones","Atun"]}
         };
         //Common Variables
         var counter = 1;
@@ -81,7 +83,6 @@ function Main(){
             parent_div.appendChild(info_div);
         }
 
-        inject_markup();
         
         //Injects the style
         function inject_style(){
@@ -93,19 +94,25 @@ function Main(){
             head_element.appendChild(style_element);
         }
 
-        inject_style();
-        if(counter < 6) {
+        if(is_found) {
             generate_html(selected_question);
+            inject_markup();
+            inject_style();
+            bind_events();
         }
 
-        var answer_list = document.getElementById("widget_answers");
 
-        for (var i=0;i < answer_list.children.length - 1 ; i++)
-        {
-            console.log(i);
-            //This line fucks shit up like no tomorrow, it doesn't let the code stop checking.
-            //answer_list[i].addEventListener("click",push_to_analytics);
-        } 
+        function bind_events() {
+
+            var answer_list = document.getElementById("widget_answers");
+
+            for (var i=1;i <= answer_list.childElementCount; i++)
+            {
+                console.log(answer_list.childNodes[i]);
+                //This line fucks shit up like no tomorrow, it doesn't let the code stop checking.
+                answer_list.childNodes[i].addEventListener("click",push_to_analytics);
+            } 
+        }
 
         function push_to_analytics()
         {
