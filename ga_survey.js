@@ -97,6 +97,12 @@ function Main(){
             var element = document.getElementById("widget_info_detail");
             element.style.display = "block";
         }
+
+        function kill_widget() {
+            var element = document.getElementById("widget_container");
+            element.style.display = "none";
+        }
+
         function show_thanks_message(){
             var thanks_message = document.createElement("p");  
             thanks_message.id = "widget_thanks";
@@ -123,8 +129,10 @@ function Main(){
             } 
 
             var element = document.getElementById("widget_info");
+            var close = document.getElementById("widget_kill");
 
             element.addEventListener("click",show_element,false);
+            close.addEventListener("click",kill_widget,false);
         }
 
         function push_to_analytics()
