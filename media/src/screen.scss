@@ -1,10 +1,19 @@
 //SCSS for GA_Widget 
 //By @PixelHorror
+//Last Mod. 25 - 05 - 11
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
-@import "compass/reset";
 
 #widget_container {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
     display: inline-block;
     position: fixed;
     bottom: 2%;
@@ -15,58 +24,60 @@
     font-size: 12px;
     width: 150px;
     color: #5e5e5e;
+    background: white;
 
-        #widget_kill {
-            float: right;
-            padding-right: 5px;
-            padding-top: 5px;
-            cursor: pointer;
-            color: #5E5E5E;
-            margin: 0;
-        }
-        #widget_question {
-            padding-bottom: 0 10px;    
-            margin: 0 10px;
-        }
+    #widget_kill {
+        float: right;
+        padding-right: 5px;
+        padding-top: 5px;
+        cursor: pointer;
+        color: #5E5E5E;
+        margin: 0;
+    }
+    #widget_question {
+        padding-bottom: 0 10px;    
+        margin: 0 10px;
+    }
 
-        #widget_answers {
-            padding: 0 10px;    
-            margin: 0 0 10px 0;
-            li {
-                @include border-radius(5px);
-                @include box-shadow(#c3c3c3 2px 2px 2px);
-                border: 1px solid #c3c3c3;
-                color: #009ada;
-                padding: 8px;
-                margin: 5px 0;
+    #widget_answers {
+        padding: 0 10px;    
+        margin: 0 0 10px 0;
+        li {
+            @include border-radius(5px);
+            @include box-shadow(#c3c3c3 2px 2px 2px);
+            list-style: none;
+            border: 1px solid #c3c3c3;
+            color: #009ada;
+            padding: 8px;
+            margin: 5px 0;
 
-                &:hover {
-                    color: white; 
-                    background: #009ada;
-                    border: 1px solid #3D7F7F;
-                    cursor: pointer;
-                }
+            &:hover {
+                color: white; 
+                background: #009ada;
+                border: 1px solid #3D7F7F;
+                cursor: pointer;
             }
         }
+    }
 
-        #widget_info {
-            background: #dddddd;
-            font-weight: bold;
-            padding: 5px;
-            cursor: pointer;
-            #widget_info_detail {
-                font-size: 10px;
-                display: none;
-            }
-        }
-
-        .hidden {
+    #widget_info {
+        background: #dddddd;
+        font-weight: bold;
+        padding: 5px;
+        cursor: pointer;
+        #widget_info_detail {
+            font-size: 10px;
             display: none;
         }
-        #widget_thanks {
-            padding: 10px;
-            color: #009ADA;
-            font-weight: bold;
-            font-size: 15px;
-        }
+    }
+
+    .hidden {
+        display: none;
+    }
+    #widget_thanks {
+        padding: 10px;
+        color: #009ADA;
+        font-weight: bold;
+        font-size: 15px;
+    }
 }
