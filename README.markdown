@@ -1,4 +1,4 @@
-#Google Analytics Survey Widget v1.0
+#Google Analytics Survey Widget v1.1.0
 ##For Monoku
 ##By the Golden Intern @PixelHorror
 
@@ -23,17 +23,18 @@ The config.rb is just the configuration file for compass, it's compressing the C
 
 ga_survey.js is the file that you want to use on your site.
 
-index.html is a simple example file so you can see how the widget works when it load.
+index.html is a simple example file so you can see how the widget works when it loads.
 
 ###Installation
 To use you must get your hands dirty with a litte of Javascript, HTML and CSS. You have two ways of using the widget:
 
-1) If your site's structure allows it, just add the "body" ID to your content wrapper, and include the ga_survey.js, then you just have to modify
-the questions as you like, remember, they MUST be 5 of them, no more, no less. To do so, you just need to change the values in the questions array.
+1. Unzip or clone the whole repo in your site directory.
 
-2) In case you can't mess with your site, change the following variable in the js file: Inside the inject_markup method there's a variable called 'element' you just need to change the value inside the element it's trying to find. For now it only searchs for ID's so keep this in mind.
+2. Edit your index HTML and add ga_survey in your script's area.
 
-Also, you'll need to install the debug version of analytics on your site. You can do this by adding: "/u/ga_debug.js" instead of the normal analytics file.
+3. Edit the JS file and modify the questions and answers that are in the array.
+
+4. Also, you'll need to install the debug version of analytics on your site. You can do this by adding: "/u/ga_debug.js" instead of the normal analytics file.
 
 That's pretty much it, enjoy it and report bugs, because I'm pretty sure there are loads.
 
