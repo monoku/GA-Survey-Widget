@@ -120,35 +120,46 @@
             //Injects the style
             function injectStyle(){
                 var head_element = document.getElementsByTagName("head")[0];
-                //Use your custom CSS here.
-                //TODO: add a way to add external resources instead of embedded css
-                var style_element = document.createElement("style");
+                var style_element = document.createElement("link");
                 style_element.setAttribute("type","text/css");
-                style_element.innerHTML = "#widget_container{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;display:inline-block;position:fixed;bottom:2%;right:5%;border:1px solid #c3c3c3;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;-ms-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;font-family:Verdana, Arial;font-size:12px;width:150px;color:#5e5e5e;background:white}#widget_container #widget_kill{float:right;padding-right:5px;padding-top:5px;cursor:pointer;color:#5E5E5E;margin:0}#widget_container #widget_question{padding-bottom:0 10px;margin:0 10px}#widget_container #widget_answers{padding:0 10px;margin:0 0 10px 0}#widget_container #widget_answers li{-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;-ms-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;-moz-box-shadow:#c3c3c3 2px 2px 2px 1px 1px 5px 0;-webkit-box-shadow:#c3c3c3 2px 2px 2px 1px 1px 5px 0;-o-box-shadow:#c3c3c3 2px 2px 2px 1px 1px 5px 0;box-shadow:#c3c3c3 2px 2px 2px 1px 1px 5px 0;list-style:none;border:1px solid #c3c3c3;color:#009ada;padding:8px;margin:5px 0}#widget_container #widget_answers li:hover{color:white;background:#009ada;border:1px solid #3D7F7F;cursor:pointer}#widget_container #widget_info{background:#dddddd;font-weight:bold;padding:5px;cursor:pointer}#widget_container #widget_info #widget_info_detail{font-size:10px;display:none}#widget_container .hidden{display:none}#widget_container #widget_thanks{padding:10px;color:#009ADA;font-weight:bold;font-size:15px}";
+                style_element.setAttribute("rel","stylesheet");
+                style_element.setAttribute("href","media/stylesheets/screen.css");
                 head_element.appendChild(style_element);
             }
             function bindEvents() {
 
                 var answer_list = document.getElementById("widget_answers");
 
-                for (var i=0; i < answer_list.childElementCount; i++)
+                for (var i=0; i < answer_list.childNodes.length; i++)
                 {
-                    answer_list.childNodes[i].addEventListener("click",pushToAnalytics,false);
+                    if (answer_list.childNodes[i].addEventListener) {
+                        answer_list.childNodes[i].addEventListener("click",pushToAnalytics,false);
+                    }
+                    else if (answer_list.childNodes[i].attachEvent) { 
+                        var htmlText = answer_list.childNodes[i].innerHTML;
+                        answer_list.childNodes[i].attachEvent("onclick", function(){pushToAnalytics(htmlText)});
+                    }
                 } 
 
                 var element = document.getElementById("widget_info");
                 var close = document.getElementById("widget_kill");
 
-                element.addEventListener("click",showElement,false);
-                close.addEventListener("click",killWidget,false);
+                if (element.addEventListener) {
+                    element.addEventListener("click",showElement,false);
+                    close.addEventListener("click",killWidget,false);
+                }
+                else if (element.attachEvent) {
+                    element.attachEvent("onclick",showElement);
+                    close.attachEvent("onclick",killWidget);
+                }
             }
 
-            function pushToAnalytics()
+            function pushToAnalytics(element)
             {
                 _gaq.push(['_setCustomVar',
                         selectedQuestion,                   
                         questions["q"+selectedQuestion].question_short,
-                        this.innerHTML, 
+                        element, 
                         1  
                         ]);
                 var container = document.getElementById("widget_question");
