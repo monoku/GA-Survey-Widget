@@ -7,6 +7,7 @@
 
 
 (function() {
+    //We set an interval for checking external resources
     function checkResources(){
         intervalId = setInterval(Main,300);
     }
@@ -18,13 +19,14 @@
 
     checkResources();
 
-    //Main body
+    //Main widget function 
     function Main(){
 
         var questionCounter = 1;
         var selectedQuestion;
         var isFound = false;
 
+        //We check if the gat object has loaded, this comes from the Analytics debug.
         if (_gat) {
             //Main Questions Array
             var questions = {
@@ -35,6 +37,7 @@
                 q5: {question:"Cual es tu nacionalidad?",question_short:"nacionalidad",answers:["Colombiano","Europeo","Japones","Atun"]}
             };
 
+            //If we haven't found the question and we're under the 5 limit questions
             while(!isFound && questionCounter < 6)
             {
                 var pageTracker = _gat._getTrackerByName();
@@ -49,6 +52,7 @@
             }
 			
 			//Generates the html of the widget
+            //@params recieves an integer which indicates the index of the chosen question
             function generateHTML(index){
                 var currentQuestion = questions["q"+index];
 
@@ -99,17 +103,19 @@
             }
 
       
-
+            //Shows the hidden info in the widget
             function showElement() {
                 var element = document.getElementById("widget_info_detail");
                 element.style.display = "block";
             }
-
+            
+            //Hides the widget
             function killWidget() {
                 var element = document.getElementById("widget_container");
                 element.style.display = "none";
             }
 
+            //Generates an small thanks message
             function showThanksMessage(){
                 var thanks_message = document.createElement("p");  
                 thanks_message.id = "widget_thanks";
@@ -117,15 +123,19 @@
                 document.getElementById("widget_container").appendChild(thanks_message);
             }
 
-            //Injects the style
+            //Generates a link so we can link some external styles
+            //TODO: Add a parameter so we can give it an external, not hardcored route.
             function injectStyle(){
                 var head_element = document.getElementsByTagName("head")[0];
                 var style_element = document.createElement("link");
                 style_element.setAttribute("type","text/css");
                 style_element.setAttribute("rel","stylesheet");
+                //TODO: send this as a parameter
                 style_element.setAttribute("href","media/stylesheets/screen.css");
                 head_element.appendChild(style_element);
             }
+
+            //Generates and binds the interaction events. Remember attachEvent is for IE
             function bindEvents() {
 
                 var answer_list = document.getElementById("widget_answers");
@@ -137,6 +147,7 @@
                     }
                     else if (answer_list.childNodes[i].attachEvent) { 
                         var htmlText = answer_list.childNodes[i].innerHTML;
+                        //We use an anonymous function to send a parameter here.
                         answer_list.childNodes[i].attachEvent("onclick", function(){pushToAnalytics(htmlText)});
                     }
                 } 
@@ -154,6 +165,7 @@
                 }
             }
 
+            //Push the selected answer to Analytics
             function pushToAnalytics(element)
             {
                 _gaq.push(['_setCustomVar',
@@ -175,6 +187,7 @@
                 second_container.style.display = "none";
             }
 
+            //If we find an available question slot call the following functions
             if(isFound) {
                 injectMarkup();
                 generateHTML(selectedQuestion);
@@ -182,6 +195,7 @@
                 bindEvents();
             }
 
+            //Stop checking
             stopCheck();
         }
     }
