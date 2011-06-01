@@ -29,40 +29,68 @@
     #widget_kill {
         float: right;
         padding-right: 5px;
+        padding-top: 5px;
         cursor: pointer;
         color: #5E5E5E;
         margin: 0;
     }
-
     #widget_question {
         padding-bottom: 0 10px;    
-        margin: 10px;
+        margin: 0 10px;
     }
 
     #widget_answers {
         padding: 0 10px;    
         margin: 0 0 10px 0;
         li {
+            box-shadow: 1px 1px 1px #B3B3B3;
             @include border-radius(5px);
             @include box-shadow(#c3c3c3 2px 2px 2px);
+        background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.29, rgb(230,230,230)),
+            color-stop(0.47, rgb(236,236,236)),
+            color-stop(0.77, rgb(255,255,255))
+        );
+        background-image: -moz-linear-gradient(
+            center bottom,
+            rgb(230,230,230) 29%,
+            rgb(236,236,236) 47%,
+            rgb(255,255,255) 77%
+        );
+            
             list-style: none;
-            border: 1px solid #c3c3c3;
             color: #009ada;
             padding: 8px;
             margin: 5px 0;
 
             &:hover {
-                color: white; 
-                background: #009ada;
-                border: 1px solid #3D7F7F;
+                color: #009ada;
+                //background: #009ada;
                 cursor: pointer;
+            background-image: -webkit-gradient(
+                linear,
+                left bottom,
+                left top,
+                color-stop(0, rgb(255,255,255)),
+                color-stop(0.66, rgb(236,236,236)),
+                color-stop(0.87, rgb(230,230,230))
+            );
+            background-image: -moz-linear-gradient(
+                center bottom,
+                rgb(255,255,255) 0%,
+                rgb(236,236,236) 66%,
+                rgb(230,230,230) 87%
+            );
+                
             }
         }
     }
 
     #widget_info {
         background: #dddddd;
-        font-weight: bold;
         padding: 5px;
         cursor: pointer;
         #widget_info_detail {
@@ -71,6 +99,9 @@
         }
     }
 
+    .hidden {
+        display: none;
+    }
     #widget_thanks {
         padding: 10px;
         color: #009ADA;

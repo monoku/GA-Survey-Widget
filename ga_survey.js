@@ -118,6 +118,7 @@
             //Generates an small thanks message
             function showThanksMessage(){
                 var thanks_message = document.createElement("p");  
+                var killTimer = window.setTimeout(killWidget, 2000);
                 thanks_message.id = "widget_thanks";
                 thanks_message.innerHTML = "Muchas Gracias por tu aporte :)";
                 document.getElementById("widget_container").appendChild(thanks_message);
