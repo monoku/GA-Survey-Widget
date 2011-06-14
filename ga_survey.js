@@ -3,10 +3,17 @@
 //an specific user. Use it to obtain more precise info about your users
 //visit: https://github.com/PixelHorror/GA-Survey-Widget for more info, fixes and detailed use
 //Copyright (c) 2011 Jeronimo Osorio (@PixelHorror) for Monoku (www.monoku.com)
-//Licensed under the MIT license. http://www.opensource.org/licenses/mit-license.php
+//Licensed under the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0.html
 
+var questionArray = {
+        q1: {question:"Cual es tu color favorito?",question_short:"Color",answers:["rojo","verde","azul"]},
+        q2: {question:"Cual es Genero?",question_short:"genero",answers:["Masculino","Femenino"]},
+        q3: {question:"Cual sabor de helado favorito?",question_short:"sabores",answers:["Fresa","Vainilla","Mora","Atun"]},
+        q4: {question:"Cual es tu musica favorita?",question_short:"musica",answers:["Rock","Salsa","Electro","Atun"]},
+        q5: {question:"Cual es tu nacionalidad?",question_short:"nacionalidad",answers:["Colombiano","Europeo","Japones","Atun"]}
+   };
 
-(function() {
+(function(questionArray) {
     //We set an interval for checking external resources
     function checkResources(){
         intervalId = setInterval(Main,300);
@@ -19,9 +26,12 @@
 
     checkResources();
 
+    
+
     //Main widget function 
     function Main(){
 
+        var questions = questionArray;
         var questionCounter = 1;
         var selectedQuestion;
         var isFound = false;
@@ -29,13 +39,7 @@
         //We check if the gat object has loaded, this comes from the Analytics debug.
         if (_gat) {
             //Main Questions Array
-            var questions = {
-                q1: {question:"Cual es tu color favorito?",question_short:"Color",answers:["rojo","verde","azul"]},
-                q2: {question:"Cual es Genero?",question_short:"genero",answers:["Masculino","Femenino"]},
-                q3: {question:"Cual sabor de helado favorito?",question_short:"sabores",answers:["Fresa","Vainilla","Mora","Atun"]},
-                q4: {question:"Cual es tu musica favorita?",question_short:"musica",answers:["Rock","Salsa","Electro","Atun"]},
-                q5: {question:"Cual es tu nacionalidad?",question_short:"nacionalidad",answers:["Colombiano","Europeo","Japones","Atun"]}
-            };
+           
 
             //If we haven't found the question and we're under the 5 limit questions
             while(!isFound && questionCounter < 6)
@@ -200,4 +204,4 @@
             stopCheck();
         }
     }
-})();
+})(questionArray);
