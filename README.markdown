@@ -1,6 +1,5 @@
 #Google Analytics Survey Widget v1.1.0
-##For Monoku
-##By the Golden Intern @PixelHorror
+##By Monoku
 
 ##Description
 This is an small and experimental javascript snippet that generates an small embeddable survey from a pool of user created questions. This information can be analized in the Google Analytics User's section, under custom variables. 

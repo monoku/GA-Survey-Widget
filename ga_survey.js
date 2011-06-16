@@ -2,15 +2,14 @@
 //Injects an small widget with several random an unique questions to
 //an specific user. Use it to obtain more precise info about your users
 //visit: https://github.com/PixelHorror/GA-Survey-Widget for more info, fixes and detailed use
-//Copyright (c) 2011 Jeronimo Osorio (@PixelHorror) for Monoku (www.monoku.com)
+//Copyright (c) by  Monoku (www.monoku.com)
 //Licensed under the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0.html
 
 var questionArray = {
         q1: {question:"Cual es tu color favorito?",question_short:"Color",answers:["rojo","verde","azul"]},
         q2: {question:"Cual es Genero?",question_short:"genero",answers:["Masculino","Femenino"]},
         q3: {question:"Cual sabor de helado favorito?",question_short:"sabores",answers:["Fresa","Vainilla","Mora","Atun"]},
-        q4: {question:"Cual es tu musica favorita?",question_short:"musica",answers:["Rock","Salsa","Electro","Atun"]},
-        q5: {question:"Cual es tu nacionalidad?",question_short:"nacionalidad",answers:["Colombiano","Europeo","Japones","Atun"]}
+        q4: {question:"Cual es tu musica favorita?",question_short:"musica",answers:["Rock","Salsa","Electro","Atun"]}
    };
 
 (function(questionArray) {
@@ -35,6 +34,11 @@ var questionArray = {
         var questionCounter = 1;
         var selectedQuestion;
         var isFound = false;
+        var questionsLength = 1;
+
+        for (a in questions) {
+            questionsLength++;
+        }
 
         //We check if the gat object has loaded, this comes from the Analytics debug.
         if (_gat) {
@@ -42,7 +46,7 @@ var questionArray = {
            
 
             //If we haven't found the question and we're under the 5 limit questions
-            while(!isFound && questionCounter < 6)
+            while(!isFound && questionCounter < questionsLength)
             {
                 var pageTracker = _gat._getTrackerByName();
                 var customVar = pageTracker._getVisitorCustomVar(questionCounter);
@@ -148,7 +152,8 @@ var questionArray = {
                 for (var i=0; i < answer_list.childNodes.length; i++)
                 {
                     if (answer_list.childNodes[i].addEventListener) {
-                        answer_list.childNodes[i].addEventListener("click",pushToAnalytics,false);
+                        var htmlText = answer_list.childNodes[i].innerHTML;
+                        answer_list.childNodes[i].addEventListener("click",function(){pushToAnalytics(htmlText)},false);
                     }
                     else if (answer_list.childNodes[i].attachEvent) { 
                         var htmlText = answer_list.childNodes[i].innerHTML;
@@ -171,6 +176,11 @@ var questionArray = {
             }
 
             //Push the selected answer to Analytics
+            //_gas.push input parameters: 
+            //1) index of the question 1 - 5
+            //2) name of the custom variable
+            //3) value of the variable
+            //4) scope for the variable, 1 for visitor level
             function pushToAnalytics(element)
             {
                 _gaq.push(['_setCustomVar',
